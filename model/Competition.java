@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Competition extends Event {
-	private ArrayList<ArrayList<Musician>> teams;
+	private ArrayList<ArrayList<Musician>> teams = new ArrayList<ArrayList<Musician>>();
 	
 	
 	

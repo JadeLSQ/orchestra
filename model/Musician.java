@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 public class Musician {
-	static private ArrayList<Musician> instances;
+	static private ArrayList<Musician> instances = new ArrayList<Musician>();
 	
 	private String name;
 	private ArrayList<Instrument> instruments;
@@ -14,7 +14,6 @@ public class Musician {
 	
 	public Musician(String name) {
 		this.name = name;
-		
 		instances.add(this);
 	}
 	

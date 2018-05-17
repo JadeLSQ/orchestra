@@ -3,9 +3,10 @@ package model;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+
 public class General extends Event {
 	private Musician conductor;
-	private ArrayList<Musician> musicians;
+	private ArrayList<Musician> musicians = new ArrayList<Musician>();
 	
 	
 	public General(String name, Calendar cal, String details, Musician conductor) {

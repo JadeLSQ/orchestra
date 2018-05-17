@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Event {
-	static private ArrayList<Event> instances;
+	private static int count = 0; 
+	private int myId = 0;
 	
+	//Remarque: on doit creer new ici car sinon OutOfBound exception, car a chaque fois on appelle le constructeur un new ArrayList se lance
+	
+	private static ArrayList<Event> instances = new ArrayList<Event>();
+
 	private String name;
 	private Calendar cal; //choose a type
 	private String details;
@@ -15,9 +20,10 @@ public class Event {
 		this.name = name;
 		this.cal = cal;
 		this.details = details;
-		
-		instances = new ArrayList<Event>();
 		instances.add(this);
+		
+		this.myId = Event.count;
+		Event.count++;
 	}
 	
 	
@@ -49,7 +55,8 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [name=" + name + ", cal=" + cal.getTime() + ", details=" + details + "]";
+		return "Event [myId= " + myId + ", name= " + name + ", Date = " + cal.getTime() + ", details= " + details
+				+ "]";
 	}	
 	
 }

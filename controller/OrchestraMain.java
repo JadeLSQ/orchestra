@@ -2,26 +2,66 @@ package controller;
 import model.*;
 import view.*;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.ArrayList;
 
 
 public class OrchestraMain {
 
 	public static void main(String[] args) {
+
+		ArrayList<Event> EventsModel = new ArrayList<Event>();
+		EventsModel= retriveEventFromDatabase();
 		
-		Event model = updateEvent();
 		view.View view = new View();
-		Controller c = new Controller(model,view);
-		
-		c.updateView();
+		Controller cont = new Controller(EventsModel,view);
+		deleteEvents(view.deleteEvent(),"Spring festival",EventsModel);
+		Musician chef1 = new Musician("Fan Fan");
+		Musician chef2 = new Musician("Zhu Ren");
+		General general1 = new General("OpSaturday Orchestra", Calendar.getInstance(), 
+				"Everyone of the Orchestra is here", chef1);
+		addMusicianToGeneral (Musician.getInstances(), general1);
+		cont.updateView();
+	
 	}
 	
-	private static Event updateEvent() {
-		Calendar cal = Calendar.getInstance();
-		//January 1st, 2018, at 10:00 AM
-		cal.set(2018, 0, 1, 10, 0, 0);
-		System.out.println("Event time is : " + cal.getTime());
-		Event m = new Event("Spring festival", cal, "First concert of the year !");
-		return m;
-	}
+	private static ArrayList<Event> retriveEventFromDatabase() {
+		//Create general events
+		Calendar cal1 = Calendar.getInstance();
+		cal1.set(2018, 0, 1, 18, 0, 0);
+		Musician conductor1 = new Musician("Jack Fan");
 
+		General gen1 = new General("Spring festival", cal1, " First concert of the year !", conductor1);
+		
+		//Create general events
+		Calendar cal2 = Calendar.getInstance();
+		cal2.set(2018, 5, 1, 20, 0, 0);
+		Competition comp1 = new Competition("Quatuor of 2018 summer", cal2, " Classical music");
+		
+		
+		return Event.getInstances();
+	}
+	
+	
+	private static boolean deleteEvents(int ID, String name, ArrayList<Event> events) {
+		//TODO
+		if (events.get(ID).getName().equals(name)) {
+		events.remove(ID);
+		System.out.println("Events ID " + ID + " deleted in Main");
+		return true;
+		}
+		else return false;
+	}
+    
+	private static void addMusicianToGeneral (ArrayList<Musician> musicians, General general) {
+		general.setMusicians(musicians);
+		System.out.println("addMusicianToGeneral executed in OrchestraMain");
+		System.out.println("Now the list has musicians : " + general.getMusicians().toString());
+		
+	}
+	
+	private static void addMusicianToCompetition (ArrayList<ArrayList<Musician>> teams, Competition competition) {
+		competition.setTeams(teams);
+	}
+	
 }
